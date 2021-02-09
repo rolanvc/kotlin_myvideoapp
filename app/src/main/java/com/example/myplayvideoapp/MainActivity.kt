@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.URLUtil
+import android.widget.MediaController
 import android.widget.VideoView
 
 private val VIDEO_NAME = "small_toy"
@@ -15,6 +16,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val controller = MediaController(this)
+        controller.setMediaPlayer(videoview)
+
+        videoview.setMediaController(controller)
     }
     private fun getURI(videoname:String): Uri {
         if (URLUtil.isValidUrl(videoname)) {
