@@ -6,12 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.URLUtil
 import android.widget.MediaController
+import android.widget.TextView
 import android.widget.VideoView
 
 private val VIDEO_NAME = "small_toy"
 
 class MainActivity : AppCompatActivity() {
     val videoview by lazy  {findViewById<VideoView>(R.id.videoview)}
+    val loading by lazy{ findViewById<TextView>(R.id.loading)}
+    val completed by lazy{ findViewById<TextView>(R.id.completed)}
+    val currentPos = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +36,26 @@ class MainActivity : AppCompatActivity() {
     }
     private fun initPlayer() {
         var videoUri:Uri = getURI(VIDEO_NAME)
+
+        loading.visibility = VideoView.VISIBLE
+        completed.visibility = VideoView.INVISIBLE
         videoview.setVideoURI(videoUri)
+
+        videoview.setOnPreparedListener{
+            loading.visibility = VideoView.INVISIBLE
+            if (currentPos > 0) {
+                videoview.seekTo(currentPos)
+            } else {
+                videoview.seekTo(1)
+            }
+            videoview.start()
+        }
+        videoview.setOnCompletionListener {
+            completed.visibility = VideoView.VISIBLE
+            videoview.seekTo(1);
+        }
         videoview.start()
+
     }
     private fun releasePlayer(){
         videoview.stopPlayback()
