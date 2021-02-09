@@ -9,7 +9,8 @@ import android.widget.MediaController
 import android.widget.TextView
 import android.widget.VideoView
 
-private val VIDEO_NAME = "small_toy"
+//private val VIDEO_NAME = "small_toy"
+private val VIDEO_NAME = "https://images.all-free-download.com/footage_preview/webm/christmas_tree_7.webm"
 
 class MainActivity : AppCompatActivity() {
     val videoview by lazy  {findViewById<VideoView>(R.id.videoview)}
