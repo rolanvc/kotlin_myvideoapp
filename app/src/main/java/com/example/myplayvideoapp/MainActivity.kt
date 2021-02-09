@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.webkit.URLUtil
 import android.widget.VideoView
 
-private val VIDEO_NAME = "small_toy.mp4"
+private val VIDEO_NAME = "small_toy"
 
 class MainActivity : AppCompatActivity() {
     val videoview by lazy  {findViewById<VideoView>(R.id.videoview)}
